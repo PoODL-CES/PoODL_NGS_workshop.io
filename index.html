@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Genomics Workshop - Kenya Edition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #003366;
+    }
+    a {
+      color: #0057aa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .video {
+      margin: 1rem 0;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    hr {
+      margin: 2rem 0;
+    }
+    .intro-video {
+      margin-bottom: 2rem;
+    }
+    video {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="intro-video">
+    <video autoplay muted loop playsinline>
+      <source src="Nature%20of%20Science.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <h1>Genomics Workshop</h1>
+  <p>
+    This hands-on workshop is designed to introduce students to the basic analysis pipeline for Next-Generation Sequencing (NGS) reads, specifically from the Illumina platform for population genetics analysis.
+  </p>
+  <p>
+    We’ll focus on whole genome resequencing data (WGS), though the same pipeline may also be applied to RAD-seq or amplicon-seq data (with minor modifications) if a reference genome is available.
+  </p>
+
+  <h3>By the end of the workshop, participants will understand how to:</h3>
+  <ul>
+    <li>Work with raw sequencing data (<code>FASTQ</code> files)</li>
+    <li>Perform quality control and preprocessing</li>
+    <li>Map reads to a reference genome</li>
+    <li>Call and filter genetic variants (SNPs/indels)</li>
+  </ul>
+
+  <hr/>
+
+  <h2>Pre-requisites & Setup</h2>
+  <p>
+    Before joining the workshop, please make sure you can access a Unix/Linux shell environment, as all commands and tools will be run from the command line.
+  </p>
+  <p>
+    Windows users may install <a href="https://mobaxterm.mobatek.net" target="_blank">MobaXterm</a>. Mac/Linux systems already have a terminal available.
+  </p>
+  <p>
+    Read: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Understand_Linux%20_commands" target="_blank">Understand_Linux_commands</a>
+  </p>
+
+  <h2>Recommended Resources</h2>
+  <h3>How Illumina Sequencing works?</h3>
+  <p><a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8" target="_blank">Watch this video to understand the technology</a></p>
+
+  <h3>Linux Shell Basics</h3>
+  <ul>
+    <li><a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Linux_basics.sh" target="_blank">Basic Tutorial</a></li>
+    <li><a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Linux_basics_solutions.sh" target="_blank">Solutions File</a></li>
+  </ul>
+
+  <h3>Advanced Linux Commands</h3>
+  <ul>
+    <li><a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Linux_advanced.sh" target="_blank">Advanced Tutorial</a></li>
+    <li><a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Linux_advanced_solutions.sh" target="_blank">Solutions File</a></li>
+  </ul>
+
+  <hr/>
+
+  <h2>Dataset Download Instructions</h2>
+  <p><a href="https://zenodo.org/records/14258052" target="_blank">Download Here</a></p>
+  <ol>
+    <li>Go to the link above.</li>
+    <li>Create a directory: <code>mkdir name_of_directory</code></li>
+    <li>Use <code>wget</code> to download files.</li>
+  </ol>
+
+  <hr/>
+
+  <h2>Workshop Pipeline</h2>
+
+  <h3>1. Initial Processing of FASTQ Files</h3>
+  <p>Script: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Fastq_file_processing_solutions.sh" target="_blank">Fastq_file_processing_solutions.sh</a></p>
+  <p>
+    Includes quality check (FastQC), adapter trimming (Trim Galore/trimmomatic), and preparing cleaned reads.
+  </p>
+  <div class="video">
+    <a href="https://www.youtube.com/watch?v=lUk5Ju3vCDM" target="_blank">
+      <img src="https://img.youtube.com/vi/lUk5Ju3vCDM/hqdefault.jpg" alt="FastQC video">
+    </a>
+  </div>
+
+  <h3>2. Mapping Reads to Reference Genome</h3>
+  <p>Script: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Read_mapping_and_sorting_solutions.sh" target="_blank">Read_mapping_and_sorting_solutions.sh</a></p>
+  <div class="video">
+    <a href="https://www.youtube.com/watch?v=omZHPZwJEBE" target="_blank">
+      <img src="https://img.youtube.com/vi/omZHPZwJEBE/hqdefault.jpg" alt="BWA video">
+    </a>
+  </div>
+
+  <h3>3. Identifying Variants (SNPs/Indels)</h3>
+  <p>Script: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Variant_identification.sh" target="_blank">Variant_identification.sh</a></p>
+  <div class="video">
+    <a href="https://www.youtube.com/watch?v=Y632IKKQW7U" target="_blank">
+      <img src="https://img.youtube.com/vi/Y632IKKQW7U/hqdefault.jpg" alt="Variant Calling video">
+    </a>
+  </div>
+
+  <h3>4. Filtering Variants</h3>
+  <p>Script: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Variant_filtering.sh" target="_blank">Variant_filtering.sh</a></p>
+  <p>Solutions File: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Variant_filtering_solution.sh" target="_blank">Variant_filtering_solution.sh</a></p>
+  <p>Explanation: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/variant_filter_description.md" target="_blank">Variant Filter Descriptions</a></p>
+
+  <h3>5. Population Structure & Visualization</h3>
+  <p>Script: <a href="https://github.com/PoODL-CES/Genomics_learning_workshop/blob/main/Basic_population_genetics.sh" target="_blank">Basic_population_genetics.sh</a></p>
+  <div class="video">
+    <a href="https://www.youtube.com/watch?v=5vgP05YpKdE" target="_blank">
+      <img src="https://img.youtube.com/vi/5vgP05YpKdE/hqdefault.jpg" alt="PCA video">
+    </a>
+  </div>
+
+  <hr/>
+  <p><em>© 2025 Kenya Genomics Workshop. Content adapted from PoODL-CES Workshop.</em></p>
+</body>
+</html>
