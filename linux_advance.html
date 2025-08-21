@@ -1,75 +1,126 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PoODL Genomics Learning Workshop</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      line-height: 1.6;
+    :root {
+      --bg: #0b1020;
+      --card: #121a33;
+      --ink: #e8ecf2;
+      --muted: #aab7d1;
+      --accent: #6aa6ff;
+      --emph: #ffd166;
+      --code-bg: #0e142a;
+      --border: #223058;
     }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 980px; margin: 40px auto; padding: 0 20px; }
+    header { margin-bottom: 24px; }
+    h1, h2, h3 { line-height: 1.25; margin: 0.6em 0 0.4em; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.4rem; color: var(--emph); }
+    h3 { font-size: 1.1rem; color: var(--accent); }
+    p { margin: 0.6em 0; color: var(--ink); }
+    .card {
+      background: linear-gradient(180deg, var(--card), #0f1730 30%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 16px 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
     pre {
-      background-color: #f0f0f0;
-      padding: 1em;
-      border-radius: 8px;
+      background: var(--code-bg);
+      padding: 14px 16px;
+      border-radius: 12px;
       overflow-x: auto;
+      border: 1px solid var(--border);
+      margin: 10px 0 0;
+      color: #d7e3ff;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
-    h2 {
-      color: #2e6c80;
+    .list { margin: 0.4em 0 0.6em 1.25em; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #0d1530;
+      color: var(--muted);
+      font-size: 12px;
+      margin-right: 6px;
     }
+    .muted { color: var(--muted); }
+    .cta {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0f1a37;
+      color: var(--ink);
+    }
+    footer { margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--border); color: var(--muted); font-size: 14px; }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <h1>Sequencing Dataset Instructions</h1>
+      <span class="tag">FASTQ</span>
+      <span class="tag">FASTA / FNA</span>
+      <span class="tag">Adapters</span>
+    </header>
 
-  <h1>🧬 FASTQ Read Analysis</h1>
+    <div class="card">
+      <h2>Download</h2>
+      <p>Download the datasets from
+        <a href="https://zenodo.org/records/14258052" target="_blank" rel="noopener noreferrer">
+          https://zenodo.org/records/14258052
+        </a>.
+      </p>
+      <p class="muted">Fastq reads are in <code>.gz</code> format. Original genome files are in <code>.fna</code> (FASTA) format.</p>
+    </div>
 
-  <h2>Download the Datasets</h2>
-  <p>Datasets are available at: <a href="https://zenodo.org/records/14258052" target="_blank">https://zenodo.org/records/14258052</a></p>
+    <div class="card">
+      <h2>Reference Index Sidecar Files</h2>
+      <ul class="list">
+        <li><code>.fna.amb</code>: stores information about the presence of ambiguous bases (e.g., <code>N</code>, or other non-standard nucleotides) in the reference genome.</li>
+        <li><code>.fna.ann</code>: stores information about the reference genome, including sequence names, lengths, and other metadata.</li>
+        <li><code>.fna.bwt</code>: contains the Burrows–Wheeler transformed sequence, a compressed representation of the reference genome.</li>
+        <li><code>.fna.pac</code>: contains packed sequence data.</li>
+        <li><code>.fna.sa</code>: suffix array index, used to locate positions of sequences within the reference genome.</li>
+      </ul>
+    </div>
 
+    <div class="card">
+      <h2>Structure of FASTQ Files</h2>
+      <p>FASTQ files are the sequencing output files obtained after demultiplexing data from Illumina sequencers. Most sequencing providers deliver Illumina data as <code>.fastq.gz</code> to reduce file size (especially on UNIX-like systems). Each record consists of four lines:</p>
+      <pre>@SRR15369215.126490887  # sequence identifier
+GGACCTTCTGTCATTTCACTCCTTCTGAAGTAAGGAGTGAAGTAAACACGAAGTAAACACGACAGGTTAGTCCTATTCCTTCAAGCAGGAGTACAGAAAAGAATGCAAATTCTGGGTTCTAGCCCAGCTTTTACTCCTATGGTTCTATTT  # sequence
++  # separator
+AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJFJJJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFAFJJJJJJJJJJJJJJJJFJJJJJJJJJFJJJJJJJJJFFFJJJJJJJJJJJ  # base call quality scores (ASCII)</pre>
+    </div>
 
-  <p><strong>Note:</strong> FASTQ reads are in <code>.gz</code> format.</p>
+    <div class="card">
+      <h2>Questions / Tasks</h2>
+      <h3>1) Count the number of sequencing reads in the FASTQ files</h3>
+      <h3>2) How many reads are shorter than 150 bp?</h3>
+      <h3>3) How many reads are longer than 150 bp?</h3>
+      <h3>4) How many reads are not equal to 150 bp?</h3>
+      <h3>5) How many reads are contaminated with Illumina adapters?</h3>
+      <p>Adapter sequence: <code>CTGTCTCTTATACACATCT</code></p>
+    </div>
 
-  <h2>Genome File Descriptions (.fna Indexes)</h2>
-  <ul>
-    <li><code>fna.amb</code> – Contains info on ambiguous bases (e.g., N).</li>
-    <li><code>fna.ann</code> – Contains metadata such as sequence names and lengths.</li>
-    <li><code>fna.bwt</code> – Burrows-Wheeler transformed sequence (compressed format).</li>
-    <li><code>fna.pac</code> – Packed sequence data.</li>
-    <li><code>fna.sa</code> – Suffix array used to locate sequences.</li>
-  </ul>
-
-  <h2>Structure of a FASTQ File</h2>
-  <p>FASTQ files (typically <code>.fastq.gz</code>) contain sequencing reads. Each read consists of four lines:</p>
-  <pre><code class="language-bash">
-@SRR15369215.126490887       # Sequence identifier
-GGACCTTCTGTCATTTCACT...      # Nucleotide sequence
-+                             # Separator
-AAFFFJJJJJJJJJJJJJJJJ...      # Base quality scores
-  </code></pre>
-
-  <h2>Read Length Analysis</h2>
-
-  <h3>Count Total Reads for <code>SRR836370_1_subset.fastq.gz</code> and <code>SRR836370_2_subset.fastq.gz</code>:</h3>
- 
-
-  <h3>Reads Shorter than 150bp for <code>SRR836370_1_subset.fastq.gz</code> and <code>SRR836370_2_subset.fastq.gz</code>:</h3>
-  
-
-  <h3>Reads Longer than 150bp for <code>SRR836370_1_subset.fastq.gz</code> and <code>SRR836370_2_subset.fastq.gz</code>:</h3>
- 
-
-  <h3>Reads Not Equal to 150bp for <code>SRR836370_1_subset.fastq.gz</code> and <code>SRR836370_2_subset.fastq.gz</code>:</h3>
-  
-
-  <h3>Reads Contaminated with Illumina Adapter for <code>SRR836370_1_subset.fastq.gz</code> and <code>SRR836370_2_subset.fastq.gz</code>:</h3>
-  <p>Adapter sequence: <code>CTGTCTCTTATACACATCT</code></p>
-
- 
-  
+    <footer>
+      <p>Tip: You can use command-line tools like <code>zcat</code>, <code>awk</code>, <code>seqtk</code>, or <code>cutadapt</code>/<code>AdapterRemoval</code> to compute these counts efficiently without fully uncompressing the files.</p>
+    </footer>
+  </div>
 </body>
 </html>
