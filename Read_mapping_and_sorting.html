@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapping Reads with BWA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 40px;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    h2, h3 {
+      color: #222222;
+      margin-top: 20px;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    ul {
+      margin: 10px 0 20px 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Mapping Reads with BWA MEM</h2>
+
+  <p>The datasets from 
+    <a href="https://zenodo.org/records/14258052" target="_blank">
+      Zenodo (14258052)
+    </a> contain the reference genome file and its index files.</p>
+
+  <p>The trimmed reads (after adapter and low-quality base removal) need to be mapped to a reference genome.</p>
+
+  <h3>Task 1: Map Reads</h3>
+  <p>Map the reads to the <b>GCA_021130815.1_PanTigT.MC.v3_genomic.fna</b> reference genome.</p>
+
+  <h3>Task 2: Convert SAM to BAM</h3>
+  <p>The mapping creates a <code>.sam</code> file which is large. Convert it into a <code>.bam</code> file.</p>
+
+  <h3>Task 3: Sort BAM Files</h3>
+  <p>Reads in SAM/BAM are arranged randomly. Sorting by genomic coordinates improves efficiency for downstream analysis like variant calling.</p>
+
+  <h3>Task 4: Remove or Mark Duplicate Reads</h3>
+  <ul>
+    <li><b>PCR duplicates:</b> arise from over-amplification during PCR, not true biological fragments.</li>
+    <li><b>Optical duplicates:</b> arise from sequencing machine artifacts.</li>
+  </ul>
+  <p><b>Note:</b> For ddRAD, RADseq, and amplicon sequencing this step should be avoided, since most reads are duplicates by design.</p>
+
+  <h3>Task 5: Index BAM File</h3>
+  <p>Indexing the sorted, duplicate-marked BAM file allows quick access to specific genomic regions for downstream SNP calling.</p>
+
+  <h3>Task 6: Estimate Statistics</h3>
+  <p>Estimate sequencing depth and percent mapping of the reads to the reference genome. Look for a section 
+    <b>"Chromosome-wise coverage"</b> or similar.</p>
+</body>
+</html>
