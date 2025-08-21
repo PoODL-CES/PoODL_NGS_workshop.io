@@ -1,74 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Linux Basics</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Linux Basics and Tasks</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #222;
       line-height: 1.6;
     }
-    pre {
-      background-color: #f0f0f0;
-      padding: 1em;
-      border-radius: 8px;
-      overflow-x: auto;
+    .wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.4em;
     }
     h2 {
-      color: #2e6c80;
+      font-size: 1.4rem;
+      margin-top: 1.2em;
+      color: #444;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1em;
+      color: #555;
+    }
+    p {
+      margin: 0.6em 0;
+    }
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f3f3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #f8f8f8;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+    ul {
+      margin: 0.6em 0 0.6em 1.2em;
+    }
+    footer {
+      margin-top: 32px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #555;
     }
   </style>
 </head>
 <body>
- </style>
-</head>
-<body>
+  <div class="wrap">
+    <header>
+      <h1>Linux Basics and Tasks</h1>
+    </header>
 
-  <h1>🐧 Linux Basics</h1>
+    <div class="card">
+      <h2>Basics</h2>
+      <p>To view a file in Linux:</p>
+      <pre>cat test_table1.txt</pre>
+      <p>or</p>
+      <pre>less test_table1.txt   # Opens file in a new window, press q to quit</pre>
 
-  <h2>To View a File in Linux:</h2>
+      <p>To list contents in a directory:</p>
+      <pre>ls &lt;folder_name&gt;</pre>
+    </div>
 
-
-  <h2>To List Contents in a Directory:</h2>
- 
-  <h2>Task 1</h2>
-
-  <h3>Create the Following Table in a File Named <code>test_table1.txt</code>:</h3>
-  <pre>
-1  2  3  4  5
-6  7  8  9  10
+    <div class="card">
+      <h2>Task 1</h2>
+      <h3>Create the following table in a file named <code>test_table1.txt</code></h3>
+      <pre>1   2   3   4   5
+6   7   8   9   10
 11  12  13  14
-15  16  17  18
-  </pre>
+15  16  17  18</pre>
 
-  </code></pre>
+      <h3>Create a directory</h3>
+      <p>Create a directory named <code>genomics_workshop_PoODL</code> and move <code>test_table1.txt</code> into it.</p>
 
-  <h3>Create a Directory named <code>basic_linux</code> and Move the File:</h3>
- 
+      <h3>Count lines</h3>
+      <p>Count the number of lines in <code>test_table1.txt</code>.</p>
 
-  <h3>Count the Number of Lines:</h3>
- 
+      <h3>Count columns</h3>
+      <p>Count the number of columns per row in <code>test_table1.txt</code>.</p>
 
-  <h3>Count the Number of Columns Per Row:</h3>
- 
+      <h3>Count occurrences of "1"</h3>
+      <p>Count how many times <code>1</code> appears in <code>test_table1.txt</code>.</p>
 
-  <h3>Count How Many Times "1" Appears:</h3>
- 
+      <h3>Count words containing "1"</h3>
+      <p>Count the number of words/strings containing <code>1</code> in <code>test_table1.txt</code>.</p>
 
-  <h3>Count Number of Words/Strings Containing "1":</h3>
- 
-
-  <h3>Delete the File:</h3>
- 
-
-</body>
-</html>
-rm genomics_workshop_PoODL/test_table1.txt
-  </code></pre>
-
+      <h3>Delete file</h3>
+      <p>Delete <code>test_table1.txt</code>.</p>
+    </div>
+  </div>
 </body>
 </html>
