@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Preprocessing of the FASTQ files  </title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #222;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.4em;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 1.2em;
+      color: #444;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1em;
+      color: #555;
+    }
+    p {
+      margin: 0.6em 0;
+    }
+    .card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f3f3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #f8f8f8;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+    ul {
+      margin: 0.6em 0 0.6em 1.2em;
+    }
+    footer {
+      margin-top: 32px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>FASTQ Preprocessing Instructions</h1>
+    </header>
+
+    <div class="card">
+      <h2>Background</h2>
+      <p>The raw FASTQ reads sometimes contain adapter sequences and have low-quality bases toward the ends, which need to be removed before further analysis.</p>
+    </div>
+
+    <div class="card">
+      <h2>Install Conda</h2>
+      <p>Follow the instructions here: 
+        <a href="https://docs.anaconda.com/miniconda/install/" target="_blank">Miniconda Installation Guide</a>.
+      </p>
+      <h3>For Linux Systems</h3>
+      <p><strong>Only run the below commands if Miniconda is not already installed:</strong></p>
+      <pre>mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm ~/miniconda3/miniconda.sh</pre>
+    </div>
+
+    <div class="card">
+      <h2>Post Installation</h2>
+      <p>After installing, close and reopen your terminal application, or refresh it by running:</p>
+      <pre>source ~/miniconda3/bin/activate</pre>
+      <p>To initialize conda on all available shells:</p>
+      <pre>miniconda3/bin/./conda init --all</pre>
+    </div>
+
+    <div class="card">
+      <h2>Tasks</h2>
+      <ul>
+        <li>Obtain a summary of FASTQ files.</li>
+        <li>Count the number of reads in the FASTQ file.</li>
+        <li>Check the distribution of read lengths and quality.</li>
+        <li>Trim the raw FASTQ reads to remove adapter sequences and low-quality bases from the ends.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
