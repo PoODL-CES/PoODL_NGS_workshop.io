@@ -32,20 +32,8 @@
 <h3>Introduction</h3>
 <p>The raw FASTQ reads sometimes contain adapter sequences and low-quality bases at the ends. These need to be removed before downstream analysis.</p>
 
-<h3>Step 1: Install Conda</h3>
-<p>Follow the instructions to install Miniconda on a Linux system:</p>
-<pre><code>mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm ~/miniconda3/miniconda.sh</code></pre>
 
-<p>Refresh the terminal:</p>
-<pre><code>source ~/miniconda3/bin/activate</code></pre>
-
-<p>Initialize conda in all available shells:</p>
-<pre><code>~/miniconda3/bin/conda init --all</code></pre>
-
-<h3>Step 2: Install and Use FastQC</h3>
+<h3>Step 1: Install and Use FastQC</h3>
 <p><strong>Install FastQC:</strong></p>
 <pre><code>conda create -n fastqc -c bioconda fastqc</code></pre>
 
@@ -67,7 +55,7 @@ scp -r name@IP_address:/path/to/html_files ~/</code></pre>
 <p><strong>Deactivate FastQC environment:</strong></p>
 <pre><code>conda deactivate fastqc</code></pre>
 
-<h3>Step 3: Trim Reads with Trim Galore</h3>
+<h3>Step 2: Trim Reads with Trim Galore</h3>
 
 <p><strong>Install Trim Galore:</strong></p>
 <pre><code>conda create -n trim-galore -c bioconda trim-galore</code></pre>
