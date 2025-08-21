@@ -3,79 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PoODL Genomics Learning Workshop</title>
+  <title>Sequencing Dataset Instructions</title>
   <style>
-    :root {
-      --bg: #0b1020;
-      --card: #121a33;
-      --ink: #e8ecf2;
-      --muted: #aab7d1;
-      --accent: #6aa6ff;
-      --emph: #ffd166;
-      --code-bg: #0e142a;
-      --border: #223058;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #222;
+      line-height: 1.6;
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 980px; margin: 40px auto; padding: 0 20px; }
-    header { margin-bottom: 24px; }
-    h1, h2, h3 { line-height: 1.25; margin: 0.6em 0 0.4em; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.4rem; color: var(--emph); }
-    h3 { font-size: 1.1rem; color: var(--accent); }
-    p { margin: 0.6em 0; color: var(--ink); }
+    .wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.4em;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 1.2em;
+      color: #444;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1em;
+      color: #555;
+    }
+    p {
+      margin: 0.6em 0;
+    }
     .card {
-      background: linear-gradient(180deg, var(--card), #0f1730 30%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px 20px;
-      margin: 16px 0;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
     }
-    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f3f3f3;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
     pre {
-      background: var(--code-bg);
-      padding: 14px 16px;
-      border-radius: 12px;
+      background: #f8f8f8;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
       overflow-x: auto;
-      border: 1px solid var(--border);
-      margin: 10px 0 0;
-      color: #d7e3ff;
-      white-space: pre-wrap;
-      word-break: break-word;
+      font-size: 0.9em;
     }
-    .list { margin: 0.4em 0 0.6em 1.25em; }
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #0d1530;
-      color: var(--muted);
-      font-size: 12px;
-      margin-right: 6px;
+    ul {
+      margin: 0.6em 0 0.6em 1.2em;
     }
-    .muted { color: var(--muted); }
-    .cta {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #0f1a37;
-      color: var(--ink);
+    footer {
+      margin-top: 32px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      font-size: 0.9em;
+      color: #555;
     }
-    footer { margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--border); color: var(--muted); font-size: 14px; }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <h1>Sequencing Dataset Instructions</h1>
-      <span class="tag">FASTQ</span>
-      <span class="tag">FASTA / FNA</span>
-      <span class="tag">Adapters</span>
     </header>
 
     <div class="card">
@@ -85,23 +92,23 @@
           https://zenodo.org/records/14258052
         </a>.
       </p>
-      <p class="muted">Fastq reads are in <code>.gz</code> format. Original genome files are in <code>.fna</code> (FASTA) format.</p>
+      <p>Fastq reads are in <code>.gz</code> format. Original genome files are in <code>.fna</code> (FASTA) format.</p>
     </div>
 
     <div class="card">
       <h2>Reference Index Sidecar Files</h2>
-      <ul class="list">
-        <li><code>.fna.amb</code>: stores information about the presence of ambiguous bases (e.g., <code>N</code>, or other non-standard nucleotides) in the reference genome.</li>
-        <li><code>.fna.ann</code>: stores information about the reference genome, including sequence names, lengths, and other metadata.</li>
-        <li><code>.fna.bwt</code>: contains the Burrows–Wheeler transformed sequence, a compressed representation of the reference genome.</li>
+      <ul>
+        <li><code>.fna.amb</code>: stores information about ambiguous bases (e.g., <code>N</code>) in the reference genome.</li>
+        <li><code>.fna.ann</code>: stores information about sequence names, lengths, and other metadata.</li>
+        <li><code>.fna.bwt</code>: contains the Burrows–Wheeler transformed sequence.</li>
         <li><code>.fna.pac</code>: contains packed sequence data.</li>
-        <li><code>.fna.sa</code>: suffix array index, used to locate positions of sequences within the reference genome.</li>
+        <li><code>.fna.sa</code>: suffix array index, used to locate sequence positions.</li>
       </ul>
     </div>
 
     <div class="card">
       <h2>Structure of FASTQ Files</h2>
-      <p>FASTQ files are the sequencing output files obtained after demultiplexing data from Illumina sequencers. Most sequencing providers deliver Illumina data as <code>.fastq.gz</code> to reduce file size (especially on UNIX-like systems). Each record consists of four lines:</p>
+      <p>FASTQ files are obtained after demultiplexing Illumina sequencing data. Providers usually deliver them as <code>.fastq.gz</code> for compression. Each record has four lines:</p>
       <pre>@SRR15369215.126490887  # sequence identifier
 GGACCTTCTGTCATTTCACTCCTTCTGAAGTAAGGAGTGAAGTAAACACGAAGTAAACACGACAGGTTAGTCCTATTCCTTCAAGCAGGAGTACAGAAAAGAATGCAAATTCTGGGTTCTAGCCCAGCTTTTACTCCTATGGTTCTATTT  # sequence
 +  # separator
@@ -119,8 +126,7 @@ AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJJJJJJJFJJJJJJJJJJFJJJJJJJJJJJJJJJJJJ
     </div>
 
     <footer>
-      <p>Tip: You can use command-line tools like <code>zcat</code>, <code>awk</code>, <code>seqtk</code>, or <code>cutadapt</code>/<code>AdapterRemoval</code> to compute these counts efficiently without fully uncompressing the files.</p>
-    </footer>
+    
   </div>
 </body>
 </html>
