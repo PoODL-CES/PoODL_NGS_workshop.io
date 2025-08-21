@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VCF Filtering and PCA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.6;
+    }
+    h2, h3 {
+      margin-top: 25px;
+      color: #222;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>VCF Filtering and PCA</h2>
+
+  <h3>Download VCF File</h3>
+  <p>
+    Download the VCF file to be used from this link:
+    <a href="https://zenodo.org/records/15173226" target="_blank">Zenodo Dataset</a>
+  </p>
+
+  <h3>Filtering and Analysis Steps</h3>
+  <ul>
+    <li>Apply base quality, genotype quality, and Hardy-Weinberg Equilibrium (HWE) filters</li>
+    <li>Remove Indels</li>
+    <li>Apply the individual missingness filter</li>
+    <li>Remove individuals with missing proportion greater than 60%</li>
+    <li>Apply a missingness filter to keep variants common among a proportion of individuals</li>
+    <li>Extract the number of variants remaining upon applying missingness filters from 0.1 to 0.9 and save to a <code>.txt</code> file</li>
+    <li>Plot the data in <code>variant_counts.txt</code> using <code>ggplot2</code></li>
+    <li>Apply max missing 0.6 filter (retain variants with at least 60% data)</li>
+    <li>Use site mean depth filter to obtain mean depth at each variant site</li>
+    <li>Find the percentile depth between 0.05 and 0.975 (middle 95 percentile)</li>
+    <li>Apply filters to keep only variants with depth values lying in this range</li>
+    <li>Perform PCA (Principal Component Analysis)</li>
+  </ul>
+
+</body>
+</html>
