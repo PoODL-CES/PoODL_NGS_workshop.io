@@ -10,26 +10,38 @@ body {
   max-width: 900px;
   margin: auto;
   padding: 40px;
-  background: #fafafa;
-  color: #333;
+  background: #ffffff;
+  color: #222;
 }
 h1, h2, h3, h4 {
-  color: #2c3e50;
+  color: #1a237e;
 }
 pre {
-  background: #272822;
-  color: #f8f8f2;
+  background: #f4f4f4;
+  color: #000;
   padding: 15px;
   overflow-x: auto;
   border-radius: 5px;
+  border: 1px solid #ddd;
 }
 code {
-  background: #eee;
-  padding: 2px 5px;
+  background: #f4f4f4;
+  padding: 2px 4px;
   border-radius: 3px;
+  color: #000;
 }
 a {
-  color: #2980b9;
+  color: #1565c0;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 30px 0;
 }
 </style>
 </head>
@@ -38,7 +50,8 @@ a {
 <h2>Variant Filtering</h2>
 <p>Download the VCF file to be used from <a href="https://zenodo.org/records/15173226">https://zenodo.org/records/15173226</a></p>
 
-<p>Variant filtering can be done using different tools like <b>bcftools</b>, <b>vcftools</b>, <b>gatk</b> etc. Here we will provide the solutions for filtering using vcftools.
+<p>Variant filtering can be done using different tools like <b>bcftools</b>, <b>vcftools</b>, <b>gatk</b>, etc.  
+Here we will provide the solutions for filtering using <b>vcftools</b>.  
 Please note that the downloaded VCF file already has a few filters applied.</p>
 
 <hr/>
@@ -50,38 +63,40 @@ Please note that the downloaded VCF file already has a few filters applied.</p>
 conda activate vcftools
 </code></pre>
 
-<p>We have been provided with a VCF file with few filters already applied:</p>
+<h4>Provided VCF file</h4>
 <p><b>Filename:</b> machali_Aligned_rangeWideMerge_strelka_update2_BENGAL_mac3_passOnly_biallelicOnly_noIndels_minMAF0Pt05_chr_E2_minDP3.recode.vcf.gz</p>
 <p>When applying new filters, change the name of the output file to reflect the new filters that have been applied.</p>
 
 <h4>Applying base quality, genotype quality, and HWE filters</h4>
 <pre><code>vcftools --gzvcf machali_Aligned_rangeWideMerge_strelka_update2_BENGAL_mac3_passOnly_biallelicOnly_noIndels_minMAF0Pt05_chr_E2_minDP3.recode.vcf.gz \
 --minQ 30 --minGQ 30 --hwe 0.05 \
---out machali_Aligned_rangeWideMerge_strelka_update2_BENGAL_mac3_passOnly_biallelicOnly_noIndels_minMAF0Pt05_chr_E2_minDP3_minQ30_minGQ30_hwe_0.05 --recode
+--out machali_..._minQ30_minGQ30_hwe_0.05 --recode
 </code></pre>
 
 <ul>
-<li><b>--minQ</b>: Minimum base quality - Filters out low Phred quality base calls, reducing sequencing errors.</li>
-<li><b>--minGQ</b>: Minimum genotype quality - Filters out low-confidence genotype calls.</li>
-<li><b>--hwe</b>: Removes sites deviating from Hardy-Weinberg equilibrium (under selection).</li>
+<li><b>--minQ</b>: Minimum base quality (removes low-quality base calls).</li>
+<li><b>--minGQ</b>: Minimum genotype quality (keeps reliable genotype calls).</li>
+<li><b>--hwe</b>: Removes variants deviating from Hardy-Weinberg equilibrium.</li>
 </ul>
 
 <h4>Remove Indels</h4>
-<pre><code>vcftools --vcf machali_Aligned_rangeWideMerge_strelka_update2_BENGAL_mac3_passOnly_biallelicOnly_noIndels_minMAF0Pt05_chr_E2_minDP3_minQ30_minGQ30_hwe_0.05.recode.vcf --remove-indels \
---out machali_Aligned_rangeWideMerge_strelka_update2_BENGAL_mac3_passOnly_biallelicOnly_rmvIndels_minMAF0Pt05_chr_E2_minDP3_minQ30_minGQ30_hwe_0.05 --recode
+<pre><code>vcftools --vcf machali_..._hwe_0.05.recode.vcf --remove-indels \
+--out machali_..._rmvIndels_hwe_0.05 --recode
 </code></pre>
 
 <h4>Apply Individual Missingness Filter</h4>
 <pre><code>vcftools --vcf machali_..._hwe_0.05.recode.vcf --missing-indv
 </code></pre>
-<p>This produces <code>out.imiss</code>, which contains the fraction of missing sites per individual (column <b>fmiss</b>). Remove individuals with more than 60% missing data:</p>
+
+<p>The command above generates <code>out.imiss</code>.  
+Remove individuals with missing data fraction &gt; 0.6:</p>
 
 <pre><code>vcftools --vcf machali_..._hwe_0.05.recode.vcf \
 --remove &lt;(awk '$5 &gt; 0.6 {print $1}' out.imiss) \
---recode --out machali_..._hwe_0.05_imiss_0.6
+--recode --out machali_..._imiss_0.6
 </code></pre>
 
-<h4>Apply Variant Missingness Filter (10% to 90%)</h4>
+<h4>Apply Variant Missingness Filter (10%–90%)</h4>
 <pre><code>for miss in {10..90..10}; do
   perc=$(echo "scale=2; $miss / 100" | bc)
   vcftools --vcf machali_..._imiss_0.6.recode.vcf \
@@ -90,33 +105,38 @@ conda activate vcftools
 done
 </code></pre>
 
-<h4>Count Variants After Each Filter</h4>
+<h4>Count Remaining Variants</h4>
 <pre><code>for miss in {10..90..10}; do
   count=$(grep -vc "^#" machali_..._miss_${miss}.recode.vcf)
   echo "${miss} ${count}" &gt;&gt; variant_counts.txt
 done
 </code></pre>
 
-<h4>Plot the Results in R (using ggplot2)</h4>
+<h4>Plot the Results (R + ggplot2)</h4>
 <pre><code>conda create -n ggplot2 -c conda-forge r-ggplot2
 conda activate ggplot2
 
-R -e "library(ggplot2); library(scales); data <- read.table('variant_counts.txt', header=FALSE, col.names=c('Missingness','Variants'));
-p <- ggplot(data, aes(x=Missingness, y=Variants)) + geom_line(color='blue') + geom_point(color='red') +
-ggtitle('Number of Passed Variants vs. Missingness Filter') + xlab('Max Missingness (%)') + ylab('Number of Variants') +
-scale_y_continuous(labels = comma) + scale_x_continuous(limits = c(10,90)) + theme_minimal(); ggsave('variant_plot.png', plot=p)"
+R -e "library(ggplot2); library(scales);
+data <- read.table('variant_counts.txt', header=FALSE, col.names=c('Missingness','Variants'));
+p <- ggplot(data, aes(x=Missingness, y=Variants)) +
+     geom_line(color='blue') + geom_point(color='red') +
+     ggtitle('Number of Passed Variants vs. Missingness Filter') +
+     xlab('Max Missingness (%)') + ylab('Number of Variants') +
+     scale_y_continuous(labels = comma) + scale_x_continuous(limits = c(10,90)) +
+     theme_minimal();
+ggsave('variant_plot.png', plot=p)"
 </code></pre>
 
-<h4>Apply Final Missingness 0.6 Filter</h4>
+<h4>Apply Max Missing 0.6 Filter</h4>
 <pre><code>vcftools --vcf machali_..._imiss_0.6.recode.vcf \
 --max-missing 0.6 --out machali_..._miss_0.6 --recode
 </code></pre>
 
-<h4>Calculate Mean Depth per Site</h4>
+<h4>Calculate Site Mean Depth</h4>
 <pre><code>vcftools --vcf machali_..._miss_0.6.recode.vcf --site-mean-depth --out depth
 </code></pre>
 
-<h4>Find 95% Depth Range (in R)</h4>
+<h4>Find 95% Depth Range (R)</h4>
 <pre><code>R
 depth_data <- read.table("depth.ldepth.mean", header = TRUE)
 depths <- depth_data$MEAN_DEPTH
@@ -131,7 +151,7 @@ cat("Middle 95% range:", lower_bound, "to", upper_bound, "\n")
 --recode --out machali_..._mid95percentile
 </code></pre>
 
-<h4>Remove Zoo Samples (ZSB prefix)</h4>
+<h4>Remove Zoo Samples (ZSB)</h4>
 <pre><code>grep 'ZSB' out.imiss | awk '{print $1}' > zsb_samples.txt
 
 vcftools --vcf machali_..._mid95percentile.recode.vcf \
@@ -139,10 +159,8 @@ vcftools --vcf machali_..._mid95percentile.recode.vcf \
 --out machali_..._mid95percentile_noZSB --recode
 </code></pre>
 
-<p>This removes zoo samples from the dataset and produces the final filtered VCF file.</p>
-
-
-
+<hr/>
+<p><i>Authored workflow for variant filtering using vcftools (Pranav & Nithin)</i></p>
 
 </body>
 </html>
