@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Genomics Workshop </title>
+  <title>Genomics Workshop</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -44,162 +45,238 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+    .colab-badge {
+      vertical-align: middle;
+      margin-left: 6px;
+    }
   </style>
 </head>
+
 <body>
 
-  <div class="intro-video">
-    <video autoplay muted loop playsinline>
-      <source src="Nature%20of%20Science.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+<div class="intro-video">
+  <video autoplay muted loop playsinline>
+    <source src="Nature%20of%20Science.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
-  <h1>Genomics Workshop</h1>
-  <p>
-    This hands-on workshop is designed to introduce students to the basic analysis pipeline for Next-Generation Sequencing (NGS) reads, specifically from the Illumina platform for population genetics analysis.
-  </p>
-  <p>
-    We’ll focus on whole genome resequencing data (WGS), though the same pipeline may also be applied to RAD-seq or amplicon-seq data (with minor modifications) if a reference genome is available.
-  </p>
+<h1>Genomics Workshop</h1>
 
-  <h3>By the end of the workshop, participants will understand how to:</h3>
-  <ul>
-    <li>Work with raw sequencing data (<code>FASTQ</code> files)</li>
-    <li>Perform quality control and preprocessing</li>
-    <li>Map reads to a reference genome</li>
-    <li>Call and filter genetic variants (SNPs/indels)</li>
-  </ul>
+<p>
+  This hands-on workshop introduces students to the basic analysis pipeline for
+  Next-Generation Sequencing (NGS) reads generated using Illumina platforms,
+  with a focus on population genetics.
+</p>
 
-  <hr/>
+<p>
+  The workshop primarily uses whole genome resequencing (WGS) data, but the
+  pipeline can also be adapted for RAD-seq or amplicon-seq data when a reference
+  genome is available.
+</p>
 
-  <h2>Pre-requisites & Setup</h2>
-  <p>
-    There are two options for running the workshop. One is through <a href="https://colab.research.google.com"> google colab </a> pages . This provides the advantage of running the workshops 
-    without the need for local computational infrastructure as long as you have a gmail account and space in google drive.
-  </p>
-  <p>
-    However, if you re not comfortable using google and would like to run the workshop on your local machine
-    please make sure you can access a Unix/Linux shell environment, as all commands and tools will be run from the command line.
-  </p>
-  <p>
-    Windows users may install <a href="https://mobaxterm.mobatek.net" target="_blank">MobaXterm</a>. Mac/Linux systems already have a terminal available.
- <ul>
+<h3>By the end of the workshop, participants will understand how to:</h3>
+<ul>
+  <li>Work with raw sequencing data (<code>FASTQ</code> files)</li>
+  <li>Perform quality control and preprocessing</li>
+  <li>Map reads to a reference genome</li>
+  <li>Call and filter genetic variants (SNPs/indels)</li>
+</ul>
+
+<hr/>
+
+<h2>Pre-requisites & Setup</h2>
+
+<p>
+  There are two ways to run this workshop. One option is using
+  <a href="https://colab.research.google.com" target="_blank">Google Colab</a>,
+  which allows you to run the analysis without any local computational setup,
+  as long as you have a Google account and Google Drive access.
+</p>
+
+<p>
+  Alternatively, you may run the workshop on your local machine using a
+  Unix/Linux shell environment.
+</p>
+
+<p>
+  Windows users may install
+  <a href="https://mobaxterm.mobatek.net" target="_blank">MobaXterm</a>.
+  Mac and Linux systems already include a terminal.
+</p>
+
+<ul>
   <li>
     Basic knowledge of Linux commands:
-    <a href="Understandingh_linux_command.html" target="_blank">Understanding Linux Commands</a>
+    <a href="Understandingh_linux_command.html" target="_blank">
+      Understanding Linux Commands
+    </a>
   </li>
 </ul>
 
+<hr/>
 
-  <h2>Recommended Resources</h2>
-  <h3>How Illumina Sequencing works?</h3>
-  <p><a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8" target="_blank">Watch this video to understand the technology</a></p>
+<h2>Recommended Resources</h2>
 
-  <h3>Linux Shell Basics</h3>
-  <ul>
-   <li><a href="linux_basics.html" target="_blank">Basic Tutorial  </a> 
-    </li>
-    <li><a href="linx_basic_solution.html" target="_blank">Linux Basics Solutions </a></li>
+<h3>How Illumina Sequencing Works</h3>
+<p>
+  <a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8" target="_blank">
+    Watch this video to understand the technology
+  </a>
+</p>
 
-  </ul>
-
-<h3>Advanced Linux Commands</h3>
+<h3>Linux Shell Basics (Local)</h3>
 <ul>
-  <li><a href="linux_advance.html" target="_blank">Advanced Tutorial </a></li>
-  <li><a href="Linux_advance_solution.html" target="_blank">Linux Advance Solutions</a></li>
+  <li><a href="linux_basics.html" target="_blank">Linux Basics Tutorial</a></li>
+  <li><a href="linx_basic_solution.html" target="_blank">Linux Basics Solutions</a></li>
 </ul>
 
-
+<h3>Advanced Linux Commands (Local)</h3>
+<ul>
+  <li><a href="linux_advance.html" target="_blank">Advanced Linux Tutorial</a></li>
+  <li><a href="Linux_advance_solution.html" target="_blank">Advanced Linux Solutions</a></li>
 </ul>
 
-  <hr/>
+<h3>Linux on Google Colab</h3>
+<ul>
+  <li>
+    Linux Basics (Google Colab)
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_basics.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+  </li>
+  <li>
+    Linux Advanced (Google Colab)
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_advanced.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+  </li>
+</ul>
 
-  <h2>Dataset Download Instructions for running the workshop on local machines</h2>
-  <p><b>skip this step is running the workshop on google colab</b></p>
-  <p>If running the workshop on local machine <a href="https://zenodo.org/records/14258052" target="_blank">download here</a></p>
-  <ol>
-    <li>Go to the link above.</li>
-    <li>Create a directory: <code>mkdir name_of_directory</code></li>
-    <li>Use <code>wget</code> to download files.</li>
-  </ol>
+<hr/>
 
-  <hr/>
+<h2>Dataset Download (Local Execution Only)</h2>
+<p><b>Skip this step if running the workshop on Google Colab.</b></p>
 
-  <h2>Workshop Pipeline</h2>
+<p>
+  Download the dataset from
+  <a href="https://zenodo.org/records/14258052" target="_blank">Zenodo</a>.
+</p>
+
+<ol>
+  <li>Create a directory: <code>mkdir workshop_data</code></li>
+  <li>Use <code>wget</code> to download files</li>
+</ol>
+
+<hr/>
+
+<h2>Workshop Pipeline</h2>
 
 <h3>1. Initial Processing of FASTQ Files</h3>
 <ul>
   <li>
-    <a href="Fastq_file_processing.html" target="_blank">FASTQ File Processing</a> <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_workshop_Colab_part1.ipynb" target="_blank"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+    <a href="Fastq_file_processing.html" target="_blank">FASTQ File Processing</a>
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_workshop_Colab_part1.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
   </li>
   <li>
-    Solutions File: <a href="Fastq_file_processing_solutions.html" target="_blank">FASTQ File Processing Solutions</a>
+    Solutions File:
+    <a href="Fastq_file_processing_solutions.html" target="_blank">
+      FASTQ File Processing Solutions
+    </a>
   </li>
 </ul>
+
 <div class="video">
   <a href="https://www.youtube.com/watch?v=lUk5Ju3vCDM" target="_blank">
     <img src="https://img.youtube.com/vi/lUk5Ju3vCDM/hqdefault.jpg" alt="FastQC video">
   </a>
 </div>
 
+<p>
+  Includes quality assessment (FastQC), adapter trimming (Trim Galore/Trimmomatic),
+  and preparation of cleaned reads.
+</p>
 
-    Includes quality check (FastQC), adapter trimming (Trim Galore/trimmomatic), and preparing cleaned reads.
- 
-
-  
 <h3>2. Mapping Reads to Reference Genome</h3>
-<p> <b>Google colab user can skip this step. This is already integrated in the previous google colab page</b></p>
-  <ul>
+<p>
+  <b>Google Colab users can skip this step, as it is integrated in the previous notebook.</b>
+</p>
+
+<ul>
+  <li><a href="Read_mapping_and_sorting.html" target="_blank">Read Mapping and Sorting</a></li>
   <li>
-    <a href="Read_mapping_and_sorting.html" target="_blank">Read Mapping and Sorting</a>
-  </li>
-  <li>
-    Solutions File: <a href="Read_mapping_and_sorting_solutions.html" target="_blank">Read Mapping and Sorting Solutions</a>
+    Solutions File:
+    <a href="Read_mapping_and_sorting_solutions.html" target="_blank">
+      Read Mapping and Sorting Solutions
+    </a>
   </li>
 </ul>
+
 <div class="video">
   <a href="https://www.youtube.com/watch?v=omZHPZwJEBE" target="_blank">
     <img src="https://img.youtube.com/vi/omZHPZwJEBE/hqdefault.jpg" alt="BWA video">
   </a>
 </div>
 
-  <h3>3. Identifying Variants (SNPs/Indels)</h3>
- 
-  <p><li><a href="Variant_identification.html" target="_blank">Variant Identification.</a> <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_snp_identification.ipynb" target="_blank"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></li>
-   
-  <p>
-  <div class="video">
-    <a href="https://www.youtube.com/watch?v=Y632IKKQW7U" target="_blank">
-      <img src="https://img.youtube.com/vi/Y632IKKQW7U/hqdefault.jpg" alt="Variant Calling video">
-    </a>
-  </div>
-
-  <h3>4. Filtering Variants</h3>
+<h3>3. Identifying Variants (SNPs/Indels)</h3>
 <ul>
   <li>
-    <a href="Variants_filtering.html" target="_blank">Variant Filtering</a> <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_Colab_Variant_filter.ipynb" target="_blank"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-  </li>
-  <li>
-    Solutions File: <a href="Variant_filtering_solution.html" target="_blank">Variant Filtering Solution</a>
-  </li>
-</ul>
-
-  <li>
-    Explaination of the filters: <a href="Variant_Filter_Descriptions.html" target="_blank">Variant Filter Descriptions</a>
-  </li>
-</ul>
-
-  <h3>5. Population Structure & Visualization</h3>
-  <p><li><a href="Basic_population_genetics.html" target="_blank">Basic Population Genetics.</a> <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_basic_pop_gen.ipynb" target="_blank"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-  </li>
-  <div class="video">
-    <a href="https://www.youtube.com/watch?v=5vgP05YpKdE" target="_blank">
-      <img src="https://img.youtube.com/vi/5vgP05YpKdE/hqdefault.jpg" alt="PCA video">
+    <a href="Variant_identification.html" target="_blank">Variant Identification</a>
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_snp_identification.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
-  </div>
+  </li>
+</ul>
 
-  <hr/>
-  <p><em>©  Content adapted from PoODL-CES Genomics_learning_Workshop.</em></p>
+<div class="video">
+  <a href="https://www.youtube.com/watch?v=Y632IKKQW7U" target="_blank">
+    <img src="https://img.youtube.com/vi/Y632IKKQW7U/hqdefault.jpg" alt="Variant Calling video">
+  </a>
+</div>
+
+<h3>4. Filtering Variants</h3>
+<ul>
+  <li>
+    <a href="Variants_filtering.html" target="_blank">Variant Filtering</a>
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_Colab_Variant_filter.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+  </li>
+  <li>
+    Solutions File:
+    <a href="Variant_filtering_solution.html" target="_blank">
+      Variant Filtering Solution
+    </a>
+  </li>
+  <li>
+    Explanation of filters:
+    <a href="Variant_Filter_Descriptions.html" target="_blank">
+      Variant Filter Descriptions
+    </a>
+  </li>
+</ul>
+
+<h3>5. Population Structure & Visualization</h3>
+<ul>
+  <li>
+    <a href="Basic_population_genetics.html" target="_blank">Basic Population Genetics</a>
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_basic_pop_gen.ipynb" target="_blank">
+      <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+    </a>
+  </li>
+</ul>
+
+<div class="video">
+  <a href="https://www.youtube.com/watch?v=5vgP05YpKdE" target="_blank">
+    <img src="https://img.youtube.com/vi/5vgP05YpKdE/hqdefault.jpg" alt="PCA video">
+  </a>
+</div>
+
+<hr/>
+
+<p><em>© Content adapted from PoODL-CES Genomics Learning Workshop.</em></p>
+
 </body>
 </html>
