@@ -64,15 +64,15 @@
 <h1>Genomics Workshop</h1>
 
 <p>
-  This hands-on workshop introduces students to the basic analysis pipeline for
-  Next-Generation Sequencing (NGS) reads generated using Illumina platforms,
-  with a focus on population genetics.
+  This hands-on workshop introduces students to a complete analysis pipeline for
+  Next-Generation Sequencing (NGS) data generated using Illumina platforms, with
+  a focus on population genetics.
 </p>
 
 <p>
-  The workshop primarily uses whole genome resequencing (WGS) data, but the
-  pipeline can also be adapted for RAD-seq or amplicon-seq data when a reference
-  genome is available.
+  The workshop primarily uses whole genome resequencing (WGS) data, but the same
+  analytical framework can be adapted for RAD-seq or amplicon-seq datasets when
+  a suitable reference genome is available.
 </p>
 
 <h3>By the end of the workshop, participants will understand how to:</h3>
@@ -81,6 +81,7 @@
   <li>Perform quality control and preprocessing</li>
   <li>Map reads to a reference genome</li>
   <li>Call and filter genetic variants (SNPs/indels)</li>
+  <li>Explore population structure using genomic data</li>
 </ul>
 
 <hr/>
@@ -88,26 +89,26 @@
 <h2>Pre-requisites & Setup</h2>
 
 <p>
-  There are two ways to run this workshop. One option is using
+  There are two ways to run this workshop. One option is through
   <a href="https://colab.research.google.com" target="_blank">Google Colab</a>,
-  which allows you to run the analysis without any local computational setup,
-  as long as you have a Google account and Google Drive access.
+  which allows users to run the entire pipeline in a cloud-based environment
+  without installing software locally.
 </p>
 
 <p>
-  Alternatively, you may run the workshop on your local machine using a
-  Unix/Linux shell environment.
+  Alternatively, participants may run the workshop on their local machines using
+  a Unix/Linux shell environment.
 </p>
 
 <p>
   Windows users may install
   <a href="https://mobaxterm.mobatek.net" target="_blank">MobaXterm</a>.
-  Mac and Linux systems already include a terminal.
+  Mac and Linux systems already provide a native terminal.
 </p>
 
 <ul>
   <li>
-    Basic knowledge of Linux commands:
+    Basic familiarity with Linux commands:
     <a href="Understandingh_linux_command.html" target="_blank">
       Understanding Linux Commands
     </a>
@@ -120,22 +121,26 @@
 
 <h3>How Illumina Sequencing Works</h3>
 <p>
+  This short video provides an overview of Illumina sequencing technology,
+  including library preparation, cluster generation, and sequencing-by-synthesis.
+</p>
+<p>
   <a href="https://www.youtube.com/watch?v=fCd6B5HRaZ8" target="_blank">
-    Watch this video to understand the technology
+    Watch the video
   </a>
 </p>
 
 <h3>Linux Shell Basics</h3>
-  <p>
+<p>
   This section introduces the Unix/Linux command-line environment used
   throughout the workshop. Participants will learn essential commands for
-  navigating to different directories, managing files, inspecting text files, and
+  navigating directories, managing files, inspecting text files, and
   understanding basic shell syntax.
 </p>
 <ul>
   <li>
     <a href="linux_basics.html" target="_blank">Linux Basics Tutorial</a>
-    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_basics.ipynb" target="_blank" title="Open Linux Basics in Google Colab">
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_basics.ipynb" target="_blank">
       <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
   </li>
@@ -144,17 +149,17 @@
   </li>
 </ul>
 
-
 <h3>Advanced Linux Commands</h3>
-  <p>
+<p>
   This section builds on basic Linux skills and introduces more advanced
-  command-line. These skills are essential for working with large genomics datasets.
+  command-line concepts such as piping, redirection, pattern matching,
+  process control, and efficient data handling. These skills are critical
+  for working with large genomics datasets.
 </p>
-
 <ul>
   <li>
     <a href="linux_advance.html" target="_blank">Advanced Linux Tutorial</a>
-    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_advanced.ipynb" target="_blank" title="Open Advanced Linux in Google Colab">
+    <a href="https://colab.research.google.com/github/PoODL-CES/Genomics_learning_workshop/blob/main/NGS_collab_Linux_advanced.ipynb" target="_blank">
       <img class="colab-badge" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
     </a>
   </li>
@@ -165,8 +170,14 @@
 
 <hr/>
 
-<h2>Dataset Download </h2>
+<h2>Dataset Download</h2>
 <p><b>Skip this step if running the workshop on Google Colab.</b></p>
+
+<p>
+  A curated example dataset is provided to ensure reproducibility and
+  consistency across all workshop exercises. This dataset will be used
+  throughout the pipeline for read processing, mapping, and variant analysis.
+</p>
 
 <p>
   Download the dataset from
@@ -175,7 +186,7 @@
 
 <ol>
   <li>Create a directory: <code>mkdir workshop_data</code></li>
-  <li>Use <code>wget</code> to download files</li>
+  <li>Use <code>wget</code> to download the required files</li>
 </ol>
 
 <hr/>
@@ -183,6 +194,11 @@
 <h2>Workshop Pipeline</h2>
 
 <h3>1. Initial Processing of FASTQ Files</h3>
+<p>
+  Raw sequencing data often contains low-quality bases and technical artifacts.
+  In this step, participants will assess read quality and remove sequencing
+  adapters and low-quality regions to generate clean, analysis-ready reads.
+</p>
 <ul>
   <li>
     <a href="Fastq_file_processing.html" target="_blank">FASTQ File Processing</a>
@@ -199,10 +215,10 @@
 </ul>
 
 <p>
-  <b>Note for Google Colab users:</b>  
+  <b>Note for Google Colab users:</b>
   The Colab notebook includes both read preprocessing
   (quality control and adapter trimming) <em>and</em> mapping of reads to the
-  reference genome. Therefore, the separate mapping step can be skipped when
+  reference genome. The separate mapping step can therefore be skipped when
   following the Colab workflow.
 </p>
 
@@ -212,14 +228,11 @@
   </a>
 </div>
 
-<p>
-  Includes quality assessment (FastQC), adapter trimming (Trim Galore/Trimmomatic),
-  and preparation of cleaned reads.
-</p>
-
 <h3>2. Mapping Reads to Reference Genome</h3>
 <p>
-  <b>Google Colab users can skip this step, as it is integrated in the previous notebook.</b>
+  Cleaned sequencing reads are aligned to a reference genome to determine
+  their genomic origin. The resulting alignment files form the foundation
+  for variant discovery and downstream population genetic analyses.
 </p>
 
 <ul>
@@ -239,6 +252,11 @@
 </div>
 
 <h3>3. Identifying Variants (SNPs/Indels)</h3>
+<p>
+  Once reads are mapped, genetic variants such as single nucleotide
+  polymorphisms (SNPs) and small insertions/deletions (indels) are identified.
+  This step converts alignment data into variant call format (VCF) files.
+</p>
 <ul>
   <li>
     <a href="Variant_identification.html" target="_blank">Variant Identification</a>
@@ -255,6 +273,11 @@
 </div>
 
 <h3>4. Filtering Variants</h3>
+<p>
+  Raw variant calls often contain false positives and low-confidence sites.
+  In this section, participants will apply quality, depth, and missingness
+  filters to generate a high-confidence variant dataset.
+</p>
 <ul>
   <li>
     <a href="Variants_filtering.html" target="_blank">Variant Filtering</a>
@@ -277,6 +300,12 @@
 </ul>
 
 <h3>5. Population Structure & Visualization</h3>
+<p>
+  The final section focuses on exploring genetic variation across individuals
+  and populations. Participants will visualize population structure using
+  approaches such as principal component analysis (PCA) and interpret
+  biological patterns from genomic data.
+</p>
 <ul>
   <li>
     <a href="Basic_population_genetics.html" target="_blank">Basic Population Genetics</a>
